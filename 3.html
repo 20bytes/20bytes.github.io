@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <title>个人主页 - [你的名字]</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --text-color: #1f2937; 
+            --text-color-light: #4b5563;
+            --text-color-lighter: #6b7280;
+            --bg-color: #f9fafb;
+            --bg-color-alt: #ffffff; 
+            --border-color: #e5e7eb;
+            --overlay-color: rgba(0, 0, 0, 0.45);
+            --font-primary: "Inter", "Noto Sans SC", sans-serif; /* Added Noto Sans SC as fallback */
+            --font-serif: "Noto Serif SC", serif;
+            --spacing-unit: 1rem;
+            --border-radius: 0.5rem;
+            --shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            
+            /* General Green Theme Accents from example */
+            --high-end-green: #2E8B57; /* SeaGreen */
+            --high-end-green-light: #8FBC8F; /* DarkSeaGreen */
+            --high-end-green-dark: #1A5238; /* Darker variant of SeaGreen */
+
+            /* Sophisticated Skill Tag Colors from example */
+            --skill-tag-bg: #EFF7F2;       /* Very light green */
+            --skill-tag-text: #3A6B4B;     /* Medium dark green */
+            --skill-tag-border: #B2D8C1;   /* Light green border */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            /* scroll-behavior: smooth; /* GSAP will handle this */
+        }
+
+        body {
+            font-family: var(--font-primary);
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            line-height: 1.7;
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            width: 100%;
+            min-height: 55vh; /* Adjusted height */
+            /* Placeholder image for hero background */
+            background: url('https://placehold.co/1920x1080/2E8B57/FFFFFF?text=Hero+Background&font=notoserifsc') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: calc(var(--spacing-unit) * 2);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--overlay-color);
+        }
+
+        .hero-content {
+            position: relative;
+            text-align: center;
+            padding: calc(var(--spacing-unit) * 2);
+        }
+
+        .hero-content h1 {
+            font-family: var(--font-serif);
+            font-size: 2.5rem; /* Adjusted size */
+            font-weight: 700;
+            margin-bottom: calc(var(--spacing-unit) * 0.75);
+            letter-spacing: 1px;
+            color: var(--bg-color-alt); 
+        }
+
+        .hero-content p {
+            font-size: 1.15rem; /* Adjusted size */
+            opacity: 0.9;
+            color: var(--bg-color-alt); 
+        }
+        
+        /* Navigation - Simple version for now, can be expanded */
+        .main-nav {
+            position: absolute;
+            top: var(--spacing-unit);
+            right: var(--spacing-unit);
+            z-index: 10;
+        }
+        .main-nav a {
+            color: var(--bg-color-alt);
+            text-decoration: none;
+            margin-left: var(--spacing-unit);
+            padding: calc(var(--spacing-unit)*0.5) var(--spacing-unit);
+            font-weight: 500;
+            border-radius: var(--border-radius);
+            transition: background-color 0.3s ease;
+        }
+        .main-nav a:hover {
+            background-color: rgba(255,255,255,0.15);
+        }
+
+
+        /* Main Content & Sections */
+        main {
+            max-width: 1000px; /* Max width for content */
+            margin: calc(var(--spacing-unit) * -6) auto calc(var(--spacing-unit) * 3); /* Negative margin for overlap */
+            padding: 0 var(--spacing-unit);
+            position: relative; /* For stacking context */
+            background-color: var(--bg-color); /* Fallback, sections have their own bg */
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        section {
+            padding: calc(var(--spacing-unit) * 2.5) calc(var(--spacing-unit) * 2); /* Adjusted padding */
+            background-color: var(--bg-color-alt); /* White background for sections inside main */
+            border-bottom: 1px solid var(--border-color);
+        }
+        section:first-of-type {
+             border-top-left-radius: var(--border-radius);
+             border-top-right-radius: var(--border-radius);
+        }
+        section:last-of-type {
+            border-bottom: none;
+            border-bottom-left-radius: var(--border-radius);
+            border-bottom-right-radius: var(--border-radius);
+        }
+
+        .section-title { 
+            font-family: var(--font-serif);
+            font-size: 1.8rem; /* Adjusted size */
+            font-weight: 600;
+            border-left: 5px solid var(--high-end-green-light); 
+            padding-left: calc(var(--spacing-unit) * 0.8);
+            margin-bottom: calc(var(--spacing-unit) * 1.8); /* Increased margin */
+            color: var(--high-end-green); 
+        }
+
+        /* About Me Section */
+        #about .about-content-wrapper {
+            display: flex;
+            align-items: flex-start; /* Align items to the top */
+            gap: calc(var(--spacing-unit) * 2);
+        }
+
+        .about-photo {
+            flex-shrink: 0;
+            width: 130px; /* Adjusted size */
+            height: 170px; /* Adjusted size for portrait */
+            border-radius: var(--border-radius);
+            object-fit: cover;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1); 
+            margin-top: calc(var(--spacing-unit) * 0.5); /* Align with text better */
+        }
+
+        .about-text {
+            flex-grow: 1;
+        }
+
+        #about .about-text p { 
+            margin-bottom: var(--spacing-unit);
+            color: var(--text-color-light);
+        }
+        #about .about-text p:last-child {
+            margin-bottom: 0;
+        }
+        
+        /* Project Sub-section Titles (Optional, if you have sub-categories in projects) */
+        .project-subsection-title {
+            font-family: var(--font-serif);
+            font-size: 1.4rem; 
+            font-weight: 600;
+            color: var(--high-end-green-dark); 
+            margin-top: calc(var(--spacing-unit) * 2);
+            margin-bottom: calc(var(--spacing-unit) * 1.25);
+            padding-bottom: calc(var(--spacing-unit) * 0.4);
+            border-bottom: 1px solid var(--border-color); 
+        }
+
+        /* Projects Grid & Card Styles */
+        .projects-grid {
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive grid */
+            gap: calc(var(--spacing-unit) * 1.5);
+        }
+
+        .project-card {
+            background: var(--bg-color-alt);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07); 
+            border: 1px solid var(--border-color);
+            display: flex; 
+            flex-direction: column;
+            transition: transform 0.25s ease-out, box-shadow 0.25s ease-out;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px); 
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); 
+        }
+
+        .project-card img.project-image { /* Added class for clarity */
+            width: 100%; 
+            height: 180px; /* Standard height for project images */
+            object-fit: cover;
+            display: block;
+            border-bottom: 1px solid var(--border-color);
+            transition: transform 0.3s ease-out;
+        }
+        .project-card:hover img.project-image {
+            transform: scale(1.03); 
+        }
+
+        .project-card .info {
+            padding: var(--spacing-unit); 
+        }
+        
+        .project-card h3 { 
+            font-family: var(--font-serif);
+            font-size: 1.2rem; 
+            margin-top: 0;
+            margin-bottom: calc(var(--spacing-unit) * 0.5);
+            color: var(--text-color); 
+        }
+        .project-card .project-time {
+            font-size: 0.8rem;
+            color: var(--text-color-lighter);
+            margin-bottom: calc(var(--spacing-unit) * 0.5);
+        }
+
+        .project-card p {
+            font-size: 0.9rem; 
+            color: var(--text-color-light);
+            line-height: 1.6;
+            margin-bottom: calc(var(--spacing-unit) * 0.75);
+        }
+        .project-card .tags {
+            margin-top: auto; /* Pushes tags to the bottom if card height varies */
+            padding-top: calc(var(--spacing-unit) * 0.5);
+        }
+
+        /* Styled Lists (Honors, etc.) */
+        .styled-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .styled-list li {
+            position: relative;
+            padding-left: calc(var(--spacing-unit) * 1.8);
+            margin-bottom: calc(var(--spacing-unit) * 0.8);
+            color: var(--text-color-light);
+        }
+
+        .styled-list li::before {
+            content: "\272A"; /* Star icon from example */
+            color: var(--high-end-green); /* Use theme color */
+            font-weight: bold;
+            font-size: 1em;
+            position: absolute;
+            left: 0;
+            top: 3px; /* Adjust vertical alignment */
+        }
+
+        /* Skills Section */
+        #skills .skill-category {
+            margin-bottom: calc(var(--spacing-unit) * 1.25);
+        }
+        #skills .skill-category strong {
+            display: block;
+            font-family: var(--font-primary);
+            font-weight: 600;
+            color: var(--text-color); 
+            margin-bottom: calc(var(--spacing-unit) * 0.5);
+        }
+
+        .skill-tag {
+            display: inline-block;
+            background-color: var(--skill-tag-bg); 
+            color: var(--skill-tag-text); 
+            padding: 0.35em 0.9em; /* Slightly adjusted padding */
+            margin: 0.25em 0.3em 0.25em 0; /* Adjusted margin */
+            border-radius: calc(var(--border-radius) * 0.6); /* Adjusted border-radius */
+            font-size: 0.88rem; /* Adjusted font-size */
+            font-weight: 500; 
+            border: 1px solid var(--skill-tag-border);
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+        .skill-tag:hover {
+            background-color: var(--skill-tag-text);
+            color: var(--skill-tag-bg);
+        }
+
+
+        /* Contact Section Link */
+        #contact p { 
+            margin-bottom: var(--spacing-unit);
+            color: var(--text-color-light);
+        }
+        #contact p:last-child {
+            margin-bottom: 0;
+        }
+        #contact p strong { 
+            color: var(--text-color);
+        }
+
+        #contact a.contact-link { /* Added class for specificity */
+            color: var(--high-end-green);
+            text-decoration: none;
+            font-weight: 600;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        #contact a.contact-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px; /* Adjusted position */
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--high-end-green-dark); 
+            transition: width 0.3s ease-out;
+        }
+        #contact a.contact-link:hover {
+            color: var(--high-end-green-dark); 
+        }
+        #contact a.contact-link:hover::after {
+            width: 100%;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-color-lighter);
+            padding: calc(var(--spacing-unit) * 2.5) var(--spacing-unit);
+            border-top: 1px solid var(--border-color);
+            background-color: var(--bg-color); /* Consistent with body background */
+        }
+        
+        /* Social Icons (Simple text based for now) */
+        .social-icons {
+            margin-top: var(--spacing-unit);
+        }
+        .social-icons a {
+            margin: 0 calc(var(--spacing-unit) * 0.75);
+            color: var(--text-color-light); 
+            font-size: 1.3rem; /* Adjusted size */
+            text-decoration: none;
+            transition: color 0.3s ease, transform 0.3s ease;
+            display: inline-block;
+            font-weight: 600;
+        }
+        .social-icons a:hover {
+            color: var(--high-end-green); 
+            transform: translateY(-2px); /* Subtle hover effect */
+        }
+
+
+        /* Responsive adjustments based on example and combined with Tailwind */
+        @media (max-width: 768px) { /* Mobile */
+            .hero { min-height: 45vh; }
+            .hero-content h1 { font-size: 2rem; }
+            .hero-content p { font-size: 1rem; }
+            main {
+                margin-top: calc(var(--spacing-unit) * -4);
+                border-radius: 0; /* Full width on mobile */
+                box-shadow: none;
+            }
+            .section-title { font-size: 1.5rem; }
+            section { padding: calc(var(--spacing-unit) * 2) var(--spacing-unit); }
+
+            #about .about-content-wrapper {
+                flex-direction: column;
+                align-items: center; /* Center photo on mobile */
+            }
+            .about-photo {
+                margin-bottom: calc(var(--spacing-unit) * 1.5);
+                width: 100px; 
+                height: 130px;
+            }
+            .about-text { text-align: center; } /* Center text on mobile */
+            
+            .main-nav { display: none; } /* Hide nav on mobile, or implement a burger menu */
+        }
+
+        /* Accessibility: Reduce motion */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                transition-duration: 0.01ms !important;
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                scroll-behavior: auto !important;
+            }
+            .project-card, .project-card img.project-image, .social-icons a { 
+                transition: none !important;
+                transform: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="hero" id="home">
+        <nav class="main-nav">
+            <a href="#about">关于我</a>
+            <a href="#projects">科研项目</a>
+            <a href="#honors">荣誉奖项</a>
+            <a href="#skills">技能栈</a>
+            <a href="#contact">联系方式</a>
+        </nav>
+        <div class="hero-content">
+            <h1>[你的名字]</h1>
+            <p>[你的学校] / [你的专业] | [你的核心研究方向或一句话简介]</p>
+        </div>
+    </section>
+
+    <main>
+        <section id="about">
+            <h2 class="section-title">关于我</h2>
+            <div class="about-content-wrapper">
+                <img src='https://placehold.co/130x170/8FBC8F/FFFFFF?text=照片&font=notosanssc' alt="个人照片 - [你的名字]" class="about-photo">
+                <div class="about-text">
+                    <p>[在这里写一段关于你学术背景、成就或个人特质的简短介绍。例如：我对探索未知充满热情，并致力于通过严谨的学术研究解决实际问题。在校期间，我积极参与各类学术项目，并取得了优异的成绩。我的未来研究方向主要集中在 [你的主要研究方向标题] ，特别是 [简要描述你的研究方向]。]</p>
+                    <p>[可以再加一段，例如：我具备扎实的数学和编程基础，熟悉Python、C++等编程语言，并有PyTorch、TensorFlow等深度学习框架的使用经验。我乐于接受挑战，具备良好的团队合作和沟通能力。]</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects">
+            <h2 class="section-title">科研与项目经历</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <img src="https://placehold.co/600x400/8FBC8F/1A5238?text=项目Alpha&font=notoserifsc" alt="项目Alpha图示" class="project-image"/>
+                    <div class="info">
+                        <h3>[项目标题1，例如：智能文本摘要系统]</h3>
+                        <p class="project-time">[项目时间，例如：2023.09 - 2024.05]</p>
+                        <p>[详细描述你的项目经历。包括背景、你的职责、使用的方法或技术、取得的成果或学到的经验。]</p>
+                        <div class="tags">
+                            <span class="skill-tag">[技术栈1]</span>
+                            <span class="skill-tag">[技术栈2]</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <img src="https://placehold.co/600x400/2E8B57/FFFFFF?text=项目Beta&font=notoserifsc" alt="项目Beta图示" class="project-image"/>
+                    <div class="info">
+                        <h3>[项目标题2，例如：基于深度学习的图像风格迁移]</h3>
+                        <p class="project-time">[项目时间，例如：2022.06 - 2023.01]</p>
+                        <p>[详细描述你的第二个项目经历。]</p>
+                        <div class="tags">
+                            <span class="skill-tag">[算法]</span>
+                            <span class="skill-tag">[Python]</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <img src="https://placehold.co/600x400/1A5238/EFF7F2?text=项目Gamma&font=notoserifsc" alt="项目Gamma图示" class="project-image"/>
+                    <div class="info">
+                        <h3>[项目标题3]</h3>
+                        <p class="project-time">[项目时间]</p>
+                        <p>[项目描述...]</p>
+                        <div class="tags">
+                            <span class="skill-tag">[技术点A]</span>
+                            <span class="skill-tag">[技术点B]</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="honors">
+            <h2 class="section-title">荣誉奖项</h2>
+            <ul class="styled-list">
+                <li>[奖项名称1] — [获奖年份/时间]</li>
+                <li>[奖项名称2] — [获奖年份/时间]</li>
+                <li>[奖项名称3] — [获奖年份/时间]</li>
+                <li>[例如：国家奖学金 — 2024年]</li>
+            </ul>
+        </section>
+
+        <section id="skills">
+            <h2 class="section-title">技能栈</h2>
+            <div class="skill-category">
+                <strong>编程语言:</strong> 
+                <span class="skill-tag">[Python]</span> <span class="skill-tag">[C++]</span> <span class="skill-tag">[Java]</span> <span class="skill-tag">[SQL]</span> 
+                </div>
+            <div class="skill-category">
+                <strong>框架与库:</strong> 
+                <span class="skill-tag">[PyTorch]</span> <span class="skill-tag">[TensorFlow]</span> <span class="skill-tag">[Scikit-learn]</span> <span class="skill-tag">[OpenCV]</span>
+                </div>
+            <div class="skill-category">
+                <strong>工具与平台:</strong> 
+                <span class="skill-tag">[Git]</span> <span class="skill-tag">[Docker]</span> <span class="skill-tag">[Linux]</span> <span class="skill-tag">[LaTeX]</span>
+                </div>
+            <div class="skill-category">
+                <strong>语言能力:</strong> 
+                <span class="skill-tag">[中文 (母语)]</span> <span class="skill-tag">[英语 (例如: CET-6)]</span>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2 class="section-title">联系方式</h2>
+            <p>如果您对我的背景或项目感兴趣，欢迎通过以下方式与我联系：</p>
+            <p><strong>邮箱:</strong> <a href="mailto:[你的邮箱地址]" class="contact-link">[你的邮箱地址]</a></p>
+            <p><strong>GitHub:</strong> <a href="https://github.com/[你的GitHub用户名]" target="_blank" rel="noopener noreferrer" class="contact-link">github.com/[你的GitHub用户名]</a></p>
+            <div class="social-icons">
+                <a href="https://github.com/[你的GitHub用户名]" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile">GitHub</a>
+                </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; <span id="currentYear"></span> [你的名字]. 版权所有.</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
+    <script>
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+        
+        gsap.registerPlugin(ScrollToPlugin); // Register ScrollToPlugin
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    const href = this.getAttribute('href');
+                    // Ensure it's an internal link and the target exists
+                    if (href.length > 1 && href.startsWith('#') && document.querySelector(href)) { 
+                        e.preventDefault();
+                        gsap.to(window, {
+                            duration: prefersReducedMotion.matches ? 0 : 0.8, // Slower for better feel
+                            scrollTo: { y: href, offsetY: 20 }, // Offset to account for any fixed elements or just for padding
+                            ease: "power2.inOut" // Smoother easing
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

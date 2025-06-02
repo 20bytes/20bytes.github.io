@@ -1,8 +1,602 @@
-<p>Hello 大家好</p>
-<p>我是霸都丶傲天，这是我的个人网站。 </p>
-<p>很高兴你来到这里, 你可以在以下的网站找到我</p>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <title>房家辉 - 个人主页</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet" />
+    <style>
+        :root {
+            --text-primary: #1f2937; /* slate-800 */
+            --text-secondary: #4b5563; /* slate-600 */
+            --text-tertiary: #6b7280; /* slate-500 */
+            --bg-main: #f8fafc; /* slate-50 */
+            --bg-content-card: #ffffff;
+            --border-color: #e5e7eb; /* slate-200 */
+            --overlay-color: rgba(0, 0, 0, 0.35); 
+            
+            --font-sans: "Inter", sans-serif;
+            --font-serif: "Noto Serif SC", serif;
+            
+            --accent-sky: #0ea5e9; /* sky-500 */
+            --accent-sky-dark: #0284c7; /* sky-600 */
+            --accent-sky-light: #7dd3fc; /* sky-300 */
 
-<ul>
-  <li> <a href="https://www.zhihu.com/people/AJLoveChina">知乎</a> </li>
-  <li> <a href="http://hejie.nigeerhuo.com">我的博客(已经不更细了,现在在知乎写文章)</a> </li>
-</ul>
+            --accent-green: #2E8B57; 
+            --accent-green-light: #8FBC8F; 
+            --accent-green-dark: #1A5238;
+
+            --skill-tag-bg: #EFF7F2;      
+            --skill-tag-text: #3A6B4B;      
+            --skill-tag-border: #B2D8C1;
+
+            --spacing-unit: 1rem;
+            --border-radius: 0.5rem; 
+            --border-radius-lg: 0.75rem; 
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            /* scroll-behavior: smooth; Managed by GSAP */
+        }
+
+        body {
+            font-family: var(--font-sans);
+            color: var(--text-primary);
+            background-color: var(--bg-main);
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        /* Hero Section Styling */
+        .hero-section-ref {
+            position: relative;
+            width: 100%;
+            min-height: 52vh; 
+            background: url('1.jpg') center/cover no-repeat; /* 请替换为您自己的背景图片URL */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: calc(var(--spacing-unit) * 2);
+            color: var(--bg-content-card); 
+        }
+
+        .hero-section-ref::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--overlay-color);
+        }
+
+        .hero-content-ref {
+            position: relative;
+            text-align: center;
+            padding: calc(var(--spacing-unit) * 2);
+        }
+        
+        .hero-content-ref h1 {
+            font-family: var(--font-serif);
+            font-size: 2.9rem; 
+            font-weight: 700;
+            margin-bottom: calc(var(--spacing-unit) * 0.75); 
+            letter-spacing: 1.5px; 
+            color: var(--bg-content-card);
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2); 
+        }
+
+        .hero-content-ref .hero-email {
+            font-family: var(--font-sans);
+            font-size: 1.25rem; 
+            opacity: 0.9;
+            color: var(--bg-content-card);
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.15); 
+        }
+        .hero-content-ref .hero-email a {
+            color: var(--bg-content-card);
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
+        .hero-content-ref .hero-email a:hover {
+            opacity: 0.8;
+            text-decoration: underline;
+        }
+
+        /* Main Content Wrapper */
+        .main-content-wrapper {
+            max-width: 1000px; 
+            margin: calc(var(--spacing-unit) * -5) auto calc(var(--spacing-unit) * 3); 
+            padding: 0; 
+            position: relative;
+            background-color: var(--bg-content-card);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-xl);
+            overflow: hidden; 
+        }
+
+        /* Section Styling */
+        .content-section {
+            padding: calc(var(--spacing-unit) * 2.5) calc(var(--spacing-unit) * 2); 
+            border-bottom: 1px solid var(--border-color);
+        }
+        .content-section:last-of-type { 
+            border-bottom: none;
+        }
+        
+        .section-heading-ref { 
+            font-family: var(--font-serif);
+            font-size: 1.9rem; 
+            font-weight: 600;
+            border-left: 5px solid var(--accent-sky); 
+            padding-left: calc(var(--spacing-unit) * 1);
+            margin-bottom: calc(var(--spacing-unit) * 2);
+            color: var(--text-primary); 
+        }
+
+        .subsection-heading-ref {
+            font-family: var(--font-serif);
+            font-size: 1.5rem; 
+            font-weight: 600;
+            color: var(--accent-sky-dark); 
+            margin-top: calc(var(--spacing-unit) * 2);
+            margin-bottom: calc(var(--spacing-unit) * 1.5);
+            padding-bottom: calc(var(--spacing-unit) * 0.5);
+            border-bottom: 1px solid var(--border-color); 
+        }
+        .section-heading-ref + .subsection-heading-ref {
+             margin-top: 0; 
+        }
+
+        /* About Me Section */
+        .about-content-wrapper-ref {
+            display: flex;
+            align-items: flex-start;
+            gap: calc(var(--spacing-unit) * 2);
+        }
+        .about-photo-ref {
+            flex-shrink: 0;
+            width: 120px; 
+            height: 160px; 
+            border-radius: var(--border-radius);
+            object-fit: cover;
+            box-shadow: var(--shadow-md);
+            margin-top: calc(var(--spacing-unit) * 0.5);
+        }
+        .about-text-ref p { 
+            margin-bottom: var(--spacing-unit);
+            color: var(--text-secondary);
+        }
+        .about-text-ref p:last-child { margin-bottom: 0; }
+        .about-text-ref .research-interests-list li { margin-bottom: calc(var(--spacing-unit) * 0.5); }
+
+        /* Project Card Styling */
+        .projects-grid-ref {
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            gap: calc(var(--spacing-unit) * 1.5);
+        }
+
+        .project-card-ref {
+            background: var(--bg-content-card); 
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            display: flex; 
+            flex-direction: column;
+            transition: transform 0.25s ease-out, box-shadow 0.25s ease-out;
+        }
+        .project-card-ref:hover {
+            transform: translateY(-5px); 
+            box-shadow: var(--shadow-lg); 
+        }
+        .project-card-ref img.project-image-ref {
+            width: 100%;
+            height: 180px; 
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s ease-out;
+        }
+        .project-card-ref:hover img.project-image-ref {
+            transform: scale(1.03); 
+        }
+        .project-card-ref .info-ref {
+            padding: var(--spacing-unit);
+            flex-grow: 1; 
+            display: flex;
+            flex-direction: column;
+        }
+        .project-card-ref .project-title-ref { 
+            font-family: var(--font-sans); 
+            font-size: 1.2rem; 
+            font-weight: 600;
+            margin-bottom: calc(var(--spacing-unit) * 0.5);
+            color: var(--text-primary); 
+        }
+        .project-card-ref .project-description-ref {
+            font-size: 0.9rem; 
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: calc(var(--spacing-unit) * 0.75);
+            flex-grow: 1; 
+        }
+        .project-card-ref .project-description-ref strong { /* Style for "项目内容" and "个人贡献" */
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        .project-card-ref .tags-container-ref {
+            margin-bottom: calc(var(--spacing-unit) * 0.75);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .skill-tag-ref {
+            display: inline-block;
+            background-color: var(--skill-tag-bg); 
+            color: var(--skill-tag-text); 
+            padding: 0.3em 0.8em;
+            border-radius: calc(var(--border-radius) * 0.5);
+            font-size: 0.85rem; 
+            font-weight: 500; 
+            border: 1px solid var(--skill-tag-border);
+            min-width: 80px;
+            text-align: center;
+        }
+        .project-source-ref {
+            font-size: 0.8rem;
+            color: var(--text-tertiary);
+            font-style: italic;
+            margin-top: calc(var(--spacing-unit) * 0.25); 
+            margin-bottom: calc(var(--spacing-unit) * 0.75); /* Increased bottom margin to push it before the end of card */
+        }
+
+        /* Removed project-link-ref styles as links are removed */
+
+        /* Footer Styling */
+        .footer-ref {
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-tertiary);
+            padding: calc(var(--spacing-unit) * 2.5) var(--spacing-unit);
+            border-top: 1px solid var(--border-color);
+            background-color: var(--bg-main); 
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 1024px) { 
+             .projects-grid-ref {
+                 grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            }
+        }
+
+        @media (max-width: 768px) { 
+            .hero-section-ref { min-height: 42vh; } 
+            .hero-content-ref h1 { font-size: 2.2rem; } 
+            .hero-content-ref .hero-email { font-size: 1.1rem; } 
+            
+            .main-content-wrapper {
+                margin-top: calc(var(--spacing-unit) * -4); 
+                border-radius: 0; 
+                box-shadow: none;
+            }
+            .content-section { padding: calc(var(--spacing-unit) * 2) var(--spacing-unit); }
+            .section-heading-ref { font-size: 1.6rem; }
+            .subsection-heading-ref { font-size: 1.3rem; }
+
+            .about-content-wrapper-ref {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .about-photo-ref { margin-bottom: var(--spacing-unit); }
+            .projects-grid-ref { 
+                grid-template-columns: 1fr; 
+            } 
+            .project-card-ref img.project-image-ref { height: 200px; }
+        }
+         @media (max-width: 480px) {
+            .hero-section-ref { min-height: 45vh; } 
+            .hero-content-ref h1 { font-size: 1.9rem; } 
+            .hero-content-ref .hero-email { font-size: 1rem; } 
+        }
+
+    </style>
+</head>
+<body>
+
+    <header class="hero-section-ref" id="home">
+        <div class="hero-content-ref">
+            <h1>房家辉</h1>
+            <p class="hero-email">
+                <a href="mailto:jiahui.fang@ieee.org">jiahui.fang@ieee.org</a>
+            </p>
+        </div>
+    </header>
+
+    <div class="main-content-wrapper">
+        <section id="about" class="content-section">
+            <h2 class="section-heading-ref">关于我</h2>
+            <div class="about-content-wrapper-ref">
+                <img src="my_photo.png" alt="个人照片 - 房家辉" class="about-photo-ref" onerror="this.src='https://placehold.co/120x160/eeeeee/999999?text=照片'; this.alt='房家辉个人照片占位图'">
+                <div class="about-text-ref">
+                    <p>我是一名对人工智能充满热情的本科生，目前就读于上海师范大学电子信息工程专业。我的研究兴趣主要集中在具身智能与多模态大模型领域，并对深度学习、自然语言处理和计算机视觉技术有深入学习。</p>
+                    <p>我渴望在研究生阶段继续深入探索这些前沿技术，并为相关的学术和应用发展做出贡献。我具备扎实的数学和编程基础，熟悉Python、C++等编程语言，并有PyTorch、TensorFlow等深度学习框架的使用经验。我乐于接受挑战，具备良好的团队合作和沟通能力。</p>
+                    <div class="mt-4"> 
+                        <p class="font-semibold text-base mb-1" style="color: var(--text-primary);">未来研究方向：</p>
+                        <ul class="list-none research-interests-list"> 
+                            <li class="flex items-center"> 
+                                <svg class="w-4 h-4 mr-2 flex-shrink-0" style="color: var(--accent-sky);" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                具身智能 (Embodied AI)
+                            </li>
+                            <li class="flex items-center"> 
+                                <svg class="w-4 h-4 mr-2 flex-shrink-0" style="color: var(--accent-sky);" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                多模态大模型 (Multimodal Large Models)
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="content-section">
+            <h2 class="section-heading-ref">科研经历</h2>
+
+            <div>
+                <h3 class="subsection-heading-ref">感兴趣方向</h3>
+                <div class="projects-grid-ref">
+                    <div class="project-card-ref">
+                        <img src="IRSTD.png" alt="红外小目标检测" class="project-image-ref" onerror="this.src='https://placehold.co/600x360/eeeeee/999999?text=项目Alpha'; this.alt='智能文本摘要系统占位图'"/>
+                        <div class="info-ref">
+                            <h4 class="project-title-ref">红外小目标检测</h4>
+                            <div class="tags-container-ref">
+                                <span class="skill-tag-ref">曲率感知</span>
+                                <span class="skill-tag-ref">高斯对齐损失</span>
+                                <span class="skill-tag-ref">轻量化</span>
+                                <span class="skill-tag-ref">遥感图像</span>
+                            </div>
+                            <p class="project-description-ref">
+                                <strong>项目内容：</strong> 针对红外小目标检测中目标尺寸小、背景复杂等难点，提出曲率感知模块CurvALE、引入多尺度特征融合结构BiFPN，并设计高斯对齐损失函数，在IRSTD-1K与NUDT-SIRST数据集上显著提升mAP50等指标表现。
+                                <br>
+                                <strong>个人贡献：</strong> <br>
+                                • 提出创新点，将曲率特征引入边缘感知模块，融合物理先验与深度学习<br>
+                                • 完成多个数据集上的实验结果，进行消融实验和对比实验验证<br>
+                                • 负责论文的撰写和图表的绘制<br>
+                            </p>
+                            <p class="project-source-ref">来源：个人探索</p>
+                            </div>
+                    </div>
+                    <div class="project-card-ref">
+                        <img src="ice.png" alt="图像风格迁移项目图示" class="project-image-ref" onerror="this.src='https://placehold.co/600x360/eeeeee/999999?text=项目Beta'; this.alt='图像风格迁移项目占位图'"/>
+                        <div class="info-ref">
+                            <h4 class="project-title-ref">复杂场景下无人机架空输电线路覆冰检测研究</h4>
+                             <div class="tags-container-ref">
+                                <span class="skill-tag-ref">边端小模型</span>
+                                <span class="skill-tag-ref">多模态大模型</span>
+                                <span class="skill-tag-ref">输电线路覆冰</span>
+                                <span class="skill-tag-ref">无人机</span>
+                            </div>
+                            <p class="project-description-ref">
+                                <strong>项目内容：</strong> 构建云边协同系统，提出轻量化检测模型、多模态垂直大模型与时序预测方法，实现输电线路覆冰的高效识别、智能诊断与精准预警。
+                                <br>
+                                <strong>个人贡献：</strong> <br>
+                                • 提出方案架构，视觉小模型+多模态大模型+时序预测，搭载无人机进行输电线路覆冰巡检<br>
+                                • 搜索和处理数据集，多边形标注图像数据，利用大模型生成覆冰分类CoT数据集<br>
+                                • 在覆冰图像数据集，训练改进的YOLOv12分割模型，mAP达98.5%；<br>
+                                • 在CoT数据集上通过Lora微调R1-OneVision-7b，实现覆冰的四分类<br>
+                            </p>
+                            <p class="project-source-ref">来源：个人探索/实验室支持</p>
+                            </div>
+                    </div>
+                    <div class="project-card-ref">
+                        <img src="robot.gif" alt="新项目Omega图示" class="project-image-ref" onerror="this.src='https://placehold.co/600x360/eeeeee/999999?text=项目Omega'; this.alt='新项目Omega占位图'"/>
+                        <div class="info-ref">
+                            <h4 class="project-title-ref">双足机器人研究</h4>
+                             <div class="tags-container-ref">
+                                <span class="skill-tag-ref">强化学习</span>
+                                <span class="skill-tag-ref">机器人步态</span>
+                                <span class="skill-tag-ref">仿真工具</span>
+                            </div>
+                            <p class="project-description-ref">
+                                <strong>项目内容：</strong> 探索双足机器人稳定站立与行走的方法，包括站立控制、步态规划、保持平衡和应对外部干扰等问题。
+                                <br>
+                                <strong>个人贡献：</strong> <br>
+                                • 调研主流机器人企业及其技术发展现状<br>
+                                • 学习强化学习算法，掌握 MuJoCo 与 Isaac Gym 等仿真平台的使用<br>
+                                • 独立搭建Issac Gym环境，跑通宇树科技的Github的demo项目<br>
+                            </p>
+                            <p class="project-source-ref">来源：老师课题</p>
+                            </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: calc(var(--spacing-unit) * 2.5);">
+                <h3 class="subsection-heading-ref">一些尝试</h3> 
+                <div class="projects-grid-ref">
+                    <div class="project-card-ref">
+                        <img src="taideng.jpg" alt="智能小车项目图示" class="project-image-ref" onerror="this.src='https://placehold.co/600x360/eeeeee/999999?text=项目Gamma'; this.alt='智能小车项目占位图'"/>
+                        <div class="info-ref">
+                            <h4 class="project-title-ref">优秀学习习惯训练助手</h4>
+                            <div class="tags-container-ref">
+                                <span class="skill-tag-ref">ESP32-BOX</span>
+                                <span class="skill-tag-ref">姿态检测</span>
+                                <span class="skill-tag-ref">Qwen2VL</span>
+                                <span class="skill-tag-ref">语音对话助手</span>
+                            </div>
+                            <p class="project-description-ref">
+                                <strong>项目内容：</strong> 设计集姿态检测、语音交互、拍照搜题于一体的多感知智能台灯系统，旨在培养儿童养成优秀的学习习惯，助力边远地区教育资源的普及。
+                                <br>
+                                <strong>个人贡献：</strong> <br>
+                                • 提出项目架构，以台灯为载体，集成姿态检测，语音交互，拍照搜题等功能<br>
+                                • 利用HTTP协议，使得EPS-CAM摄像头画面回传，调用Qwen2VL大模型接口，采取截取帧的方式进行分析，并通过TTS实现语音输出，实现拍照搜题功能<br>
+                                • 焊接灯带，利用Rain-Maker实现远程控制台灯<br>
+                            </p>
+                            <p class="project-source-ref">来源：物联网设计大赛作品</p>
+                             </div>
+                    </div>
+                    <div class="project-card-ref">
+                        <img src="diansai.jpg" alt="健康监测设备图示" class="project-image-ref" onerror="this.src='https://placehold.co/600x360/eeeeee/999999?text=项目Delta'; this.alt='健康监测设备占位图'"/>
+                        <div class="info-ref">
+                            <h4 class="project-title-ref">无线传输信号模拟系统</h4>
+                            <div class="tags-container-ref">
+                                <span class="skill-tag-ref">STM32F4</span>
+                                <span class="skill-tag-ref">AD9959</span>
+                                <span class="skill-tag-ref">乘法器AD835</span>
+                                <span class="skill-tag-ref">调制</span>
+                            </div>
+                            <p class="project-description-ref">
+                                <strong>项目内容：</strong> 基于STM32F407主控，采用AD9959生成信号，OPA847加法处理，AD835实现调幅，AGC稳定信号，结合程控衰减和合路器，模拟真实无线信道并输出稳定高精度信号
+                                <br>
+                                <strong>个人贡献：</strong> <br>
+                                • 构建项目的解决方案，学习关于调制的理论知识<br>
+                                • 电路板焊接，同轴线走线设计，开发板测试<br>
+                                • 基于STM32F4的AD9959驱动代码，参与控制代码的编写<br>
+                            </p>    
+                            <p class="project-source-ref">来源：电子设计大赛作品</p>
+                            </div>
+                    </div>
+                    <div class="project-card-ref">
+                        <img src="msd.jpg" alt="交互式数据可视化平台图示" class="project-image-ref" onerror="this.src='https://placehold.co/600x360/eeeeee/999999?text=项目Epsilon'; this.alt='交互式数据可视化平台占位图'"/>
+                        <div class="info-ref">
+                            <h4 class="project-title-ref">TW-MSD加法器对比研究</h4>
+                            <div class="tags-container-ref">
+                                <span class="skill-tag-ref">FPGA</span>
+                                <span class="skill-tag-ref">光学计算机</span>
+                                <span class="skill-tag-ref">Vue.js</span>
+                            </div>
+                            <p class="project-description-ref">
+                                <strong>项目内容：</strong> 在FPGA上实现TW-MSD并行加法器，并与多种常用加法器对比验证其速度优势。<br>
+                                <strong>个人贡献：</strong> <br>
+                                • 学习三值光学计算机的理论知识，了解MSD加法器<br>
+                                • 编写Verilog代码，实现TW-MSD加法器,实验验证TW-MSD加法器比行波加法器快2个时钟沿<br>
+                            </p>    
+                            <p class="project-source-ref">来源：老师课题</p>
+                             </div>
+                    </div>
+                    <div class="project-card-ref">
+                        <img src="park.png" alt="智能家居语音控制模块图示" class="project-image-ref" onerror="this.src='https://placehold.co/600x360/eeeeee/999999?text=项目Zeta'; this.alt='智能家居语音控制模块占位图'"/>
+                        <div class="info-ref">
+                            <h4 class="project-title-ref">优化A*新型停车场导航方案</h4>
+                            <div class="tags-container-ref">
+                                <span class="skill-tag-ref">YOLO-SEAM</span>
+                                <span class="skill-tag-ref">PP-OCR</span>
+                                <span class="skill-tag-ref">A*算法</span>
+                                <span class="skill-tag-ref">动态权重</span>
+                            </div>
+                            <p class="project-description-ref">
+                                <strong>项目内容：</strong> 融合YOLO11与PP-OCR技术，结合改进A*算法，实现车牌识别与高效路径引导，构建智能化停车导航系统。
+                                <br>
+                                <strong>个人贡献：</strong> <br>
+                                • 基于YOLO11，在Head部分引入SEAM注意力机制，改进车票遮挡识别情况<br>
+                                • 基于A*算法，引入动态权重，实现高效路径引导<br>
+                            </p>    
+                            <p class="project-source-ref">来源：学长项目复现与改进</p>
+                            </div>
+                    </div>
+                    <div class="project-card-ref">
+                        <img src="xiaoche.jpg" alt="个性化学习路径推荐系统图示" class="project-image-ref" onerror="this.src='https://placehold.co/600x360/eeeeee/999999?text=项目Eta'; this.alt='个性化学习路径推荐系统占位图'"/>
+                        <div class="info-ref">
+                            <h4 class="project-title-ref">电磁循迹小车</h4>
+                            <div class="tags-container-ref">
+                                <span class="skill-tag-ref">电磁循迹</span>
+                                <span class="skill-tag-ref">PID控制</span>
+                                <span class="skill-tag-ref">STM32C8T6</span>
+                            </div>
+                            <p class="project-description-ref">
+                                <strong>项目内容：</strong> 设计并实现一款基于电磁感应原理的循迹小车，利用霍尔传感器识别磁条路径，通过单片机控制电机驱动系统。
+                                <br>
+                                <strong>个人贡献：</strong> <br>
+                                • 学习PID控制算法，参与小车机械组装与代码调试<br>
+                                • 尝试利用嘉立创复现小车STM32C8T6主控的拓展版<br>
+                            </p>    
+                            <p class="project-source-ref">来源：智能车校级选拔赛作品</p>
+                             </div>
+                    </div>
+                    <div class="project-card-ref">
+                        <img src="kecheng.png" alt="基于机器视觉的缺陷检测图示" class="project-image-ref" onerror="this.src='https://placehold.co/600x360/eeeeee/999999?text=项目Theta'; this.alt='基于机器视觉的缺陷检测占位图'"/>
+                        <div class="info-ref">
+                            <h4 class="project-title-ref">无障碍视觉辅助系统</h4>
+                            <div class="tags-container-ref">
+                                <span class="skill-tag-ref">树莓派</span>
+                                <span class="skill-tag-ref">语音识别</span>
+                                <span class="skill-tag-ref">TTS语音合成</span>
+                                <span class="skill-tag-ref">Qwen2.5VL</span>
+                            </div>
+                            <p class="project-description-ref">
+                                <strong>项目内容：</strong> 基于树莓派的视觉辅助系统，融合视觉语言模型与语音交互，助力视障人士实现家庭环境感知与智能辅助，低成本高实用性。
+                                <br>
+                                <strong>个人贡献：</strong> <br>
+                                • 独立完成树莓派主控的代码编写，实现语音交互功能<br>
+                                • 使用FastAPI搭建后端API接口，实现图像回传大模型，实现多模态交互<br>
+                            </p>    
+                            <p class="project-source-ref">来源：电子系统设计课程作业</p>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer-ref">
+        <p>&copy; <span id="currentYear"></span> 房家辉. 保留所有权利.</p>
+        <p class="text-sm opacity-75 mt-1"></p> 
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set current year in footer
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+            // GSAP Smooth Scrolling for internal links
+            gsap.registerPlugin(ScrollToPlugin);
+            const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    const href = this.getAttribute('href');
+                    if (href.length > 1 && href.startsWith('#') && document.querySelector(href)) {
+                        e.preventDefault();
+                        gsap.to(window, {
+                            duration: prefersReducedMotion.matches ? 0 : 0.8, 
+                            scrollTo: { y: href, offsetY: 50 }, 
+                            ease: "power2.inOut"
+                        });
+                    }
+                });
+            });
+
+            document.querySelectorAll('img').forEach(img => {
+                if (!img.hasAttribute('onerror')) { 
+                    img.onerror = function() {
+                        let placeholderText = "图片";
+                        if (this.alt) {
+                            placeholderText = this.alt.includes("照片") || this.alt.includes("房家辉") ? "照片" : "项目图片";
+                        }
+                        this.src = `https://placehold.co/${this.naturalWidth || 150}x${this.naturalHeight || 150}/eeeeee/999999?text=${encodeURIComponent(placeholderText)}`;
+                        if (this.alt) {
+                             this.alt = `${this.alt} (占位图)`;
+                        } else {
+                             this.alt = `${placeholderText} (占位图)`;
+                        }
+                    };
+                }
+                if (!img.getAttribute('src') || img.getAttribute('src') === '#') {
+                    img.src = ''; 
+                }
+            });
+        });
+    </script>
+</body>
+</html>
